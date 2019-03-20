@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchArticle, showComments} from "../actions";
+import {clearItem, fetchArticle, showComments} from "../actions";
 import {getComments, getItem} from "../selectors";
 
 class Item extends Component {
@@ -9,19 +9,20 @@ class Item extends Component {
         this.props.fetchArticle(this.props.match.params.id);
     }
 
+    componentWillUnmount() {
+        this.props.clearItem();
+    }
+
     renderComments() {
         const {comments} = this.props;
         return (
             <div>
-                {comments.map((comment, index) => {
+                {comments.map(({body, email}, index) => {
                     return (
-                        <Fragment key={index}>
-                            {this.props.article.id === comment.postId &&
-                            <div style={{borderBottom: "1px solid gray"}} key={index}>
-                                <p style={{fontWeight: 500, marginBottom: "5px"}}>{comment.email} says:</p>
-                                <span>{comment.body}</span>
-                            </div>}
-                        </Fragment>
+                        <div style={{borderBottom: "1px solid gray"}} key={index}>
+                            <p style={{fontWeight: 500, marginBottom: "5px"}}>{email} says:</p>
+                            <span>{body}</span>
+                        </div>
                     )
                 })}
             </div>
@@ -60,7 +61,8 @@ const MapStateToProps = state => ({
 
 const MapDispatchToProps = {
     fetchArticle,
-    showComments
+    showComments,
+    clearItem
 };
 
 export default connect(MapStateToProps, MapDispatchToProps)(Item);

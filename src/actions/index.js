@@ -6,7 +6,9 @@ import {
     FETCH_ARTICLE_SUCCESS,
     FETCH_ARTICLE_FAIL,
     SHOW_COMMENTS_START,
-    SHOW_COMMENTS_SUCCESS, SHOW_COMMENTS_FAIL
+    SHOW_COMMENTS_SUCCESS,
+    SHOW_COMMENTS_FAIL,
+    CLEAR_ITEM
 } from '../actionsTypes';
 import {fetchArticlesApi, fetchArticleApi, fetchCommentsApi} from '../api/sysApi';
 
@@ -61,4 +63,10 @@ export const showComments = (id) => async dispatch => {
             error: true
         })
     }
+};
+
+export const clearItem = () => dispatch => {
+    dispatch({
+        type: CLEAR_ITEM
+    })
 };
