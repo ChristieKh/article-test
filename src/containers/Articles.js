@@ -1,25 +1,13 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {connect} from "react-redux";
 import {fetchArticles} from "../actions";
 import {getArticles} from "../selectors";
-import {Link} from "react-router-dom";
+import ArticlesList from "../components/ArticlesList";
 
 class Articles extends Component {
 
     componentDidMount() {
         this.props.fetchArticles();
-    }
-
-    renderArticles(item, index) {
-        return (
-            <div className="row" key={index}>
-                <div className="">
-                    <Link to={`/item/${item.id}`}>
-                        <li className="">{item.title}</li>
-                    </Link>
-                </div>
-            </div>
-        )
     }
 
     render() {
@@ -28,7 +16,9 @@ class Articles extends Component {
         return (
             <div className="container">
                 <h1>Articles</h1>
-                {loading && articles.map((item, index) => this.renderArticles(item, index))}
+                {loading && articles.map((item, index) => {
+                    return <ArticlesList item={item} key={index}/>
+                })}
             </div>
         )
     }

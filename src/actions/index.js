@@ -16,15 +16,15 @@ export const fetchArticles = () => async dispatch => {
     dispatch({type: FETCH_ARTICLES_START});
 
     try {
-        const articles = await fetchArticlesApi();
+        const articlesApi = await fetchArticlesApi();
         dispatch({
             type: FETCH_ARTICLES_SUCCESS,
-            payload: articles
+            articles: articlesApi
         })
     } catch (err) {
         dispatch({
             type: FETCH_ARTICLES_FAIL,
-            payload: err,
+            articles: err,
             error: true
         })
     }
@@ -33,15 +33,15 @@ export const fetchArticle = (id) => async dispatch => {
     dispatch({type: FETCH_ARTICLE_START});
 
     try {
-        const article = await fetchArticleApi(id);
+        const articleApi = await fetchArticleApi(id);
         dispatch({
             type: FETCH_ARTICLE_SUCCESS,
-            payload: article
+            article: articleApi
         })
     } catch (err) {
         dispatch({
             type: FETCH_ARTICLE_FAIL,
-            payload: err,
+            article: err,
             error: true
         })
     }
@@ -51,15 +51,15 @@ export const showComments = (id) => async dispatch => {
     dispatch({type: SHOW_COMMENTS_START});
 
     try {
-        const comments = await fetchCommentsApi(id);
+        const commentsApi = await fetchCommentsApi(id);
         dispatch({
             type: SHOW_COMMENTS_SUCCESS,
-            payload: comments
+            comments: commentsApi
         })
     } catch (err) {
         dispatch({
             type: SHOW_COMMENTS_FAIL,
-            payload: err,
+            comments: err,
             error: true
         })
     }

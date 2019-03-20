@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {clearItem, fetchArticle, showComments} from "../actions";
 import {getComments, getItem} from "../selectors";
+import Comments from "../components/Comments";
 
 class Item extends Component {
 
@@ -11,22 +12,6 @@ class Item extends Component {
 
     componentWillUnmount() {
         this.props.clearItem();
-    }
-
-    renderComments() {
-        const {comments} = this.props;
-        return (
-            <div>
-                {comments.map(({body, email}, index) => {
-                    return (
-                        <div style={{borderBottom: "1px solid gray"}} key={index}>
-                            <p style={{fontWeight: 500, marginBottom: "5px"}}>{email} says:</p>
-                            <span>{body}</span>
-                        </div>
-                    )
-                })}
-            </div>
-        )
     }
 
     contentItem() {
@@ -39,7 +24,10 @@ class Item extends Component {
                 <p>{body}</p>
                 <button className="btn" onClick={() => showComments(this.props.match.params.id)}>Show all comments
                 </button>
-                {!loading && this.renderComments()}
+                {!loading &&
+                comments.map(({body, email}, index) => {
+                    return <Comments body={body} email={email} key={index}/>
+                })}
             </div>
         )
     }

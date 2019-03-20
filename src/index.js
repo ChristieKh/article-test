@@ -3,8 +3,8 @@ import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {Route, Router} from 'react-router-dom';
 import store, {history} from './store'
-import Articles from "./components/Articles";
-import Item from "./components/Item";
+import Articles from "./containers/Articles";
+import Item from "./containers/Item";
 
 import './index.css'
 
