@@ -14,6 +14,6 @@ render(
     <Provider store={store}>
         <Router history={history}>
             <Route exact path="/" component={Articles}/>
-            <Route exact path="/item/:id" component={Item}/>
+            <Route path="/item/:id" component={Item}/>
         </Router>
     </Provider>, target);

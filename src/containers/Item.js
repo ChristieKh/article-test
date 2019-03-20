@@ -14,15 +14,19 @@ class Item extends Component {
         this.props.clearItem();
     }
 
+    isLoading(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
     contentItem() {
         const {article: {title, body}, comments, showComments} = this.props;
-        const loading = Object.keys(comments).length === 0;
+        const loading = this.isLoading(comments);
         return (
             <div>
-                <h1>Article</h1>
-                <h3>{title}</h3>
+                <h1>{title}</h1>
                 <p>{body}</p>
-                <button className="btn" onClick={() => showComments(this.props.match.params.id)}>Show all comments
+                <button className="btn" onClick={() => showComments(this.props.match.params.id)}>
+                    Show all comments
                 </button>
                 {!loading &&
                 comments.map(({body, email}, index) => {
@@ -33,10 +37,10 @@ class Item extends Component {
     }
 
     render() {
-        const loading = Object.keys(this.props.article).length !== 0;
+        const loading = this.isLoading(this.props.article);
         return (
             <div className="container">
-                {loading && this.contentItem()}
+                {!loading && this.contentItem()}
             </div>
         )
     }
