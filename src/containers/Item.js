@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {clearItem, fetchArticle, showComments} from "../actions";
 import {getComments, getItem} from "../selectors";
 import Comments from "../components/Comments";
+import ToggleOpen from "../decorators/ToggleOpen";
+import {isLoading} from "../utils/utils";
 
 class Item extends Component {
 
@@ -13,22 +15,22 @@ class Item extends Component {
     componentWillUnmount() {
         this.props.clearItem();
     }
-
-    isLoading(obj) {
-        return Object.keys(obj).length === 0;
-    }
-
     contentItem() {
-        const {article: {title, body}, comments, showComments} = this.props;
-        const loading = this.isLoading(comments);
+        const {article: {title, body}, comments, showComments, isOpen, toggleOpen} = this.props;
+        let btnTitle;
+        if (isOpen) {
+            showComments(this.props.match.params.id);
+            btnTitle = 'hide comments'
+        } else btnTitle = 'show all comments';
+        const loading = isLoading(comments);
         return (
             <div>
                 <h1>{title}</h1>
                 <p>{body}</p>
-                <button className="btn" onClick={() => showComments(this.props.match.params.id)}>
-                    Show all comments
+                <button className="btn" onClick={toggleOpen}>
+                    {btnTitle}
                 </button>
-                {!loading &&
+                {!loading && isOpen &&
                 comments.map(({body, email}, index) => {
                     return <Comments body={body} email={email} key={index}/>
                 })}
@@ -37,7 +39,7 @@ class Item extends Component {
     }
 
     render() {
-        const loading = this.isLoading(this.props.article);
+        const loading = isLoading(this.props.article);
         return (
             <div className="container">
                 {!loading && this.contentItem()}
@@ -57,4 +59,4 @@ const MapDispatchToProps = {
     clearItem
 };
 
-export default connect(MapStateToProps, MapDispatchToProps)(Item);
+export default connect(MapStateToProps, MapDispatchToProps)(ToggleOpen(Item));
