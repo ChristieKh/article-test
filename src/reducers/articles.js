@@ -1,4 +1,4 @@
-import {FETCH_ARTICLES_SUCCESS} from "../actionsTypes";
+import { FETCH_ARTICLES_SUCCESS} from "../actionsTypes";
 
 const initialState = {};
 

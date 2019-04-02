@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {clearItem, fetchArticle, showComments} from "../actions";
-import {getComments, getItem} from "../selectors";
+import {getComments, getItem, loadingArticle, loadingComments} from "../selectors";
 import Comments from "../components/Comments";
 import ToggleOpen from "../decorators/ToggleOpen";
-import {isLoading} from "../utils/utils";
 
 class Item extends Component {
 
@@ -15,22 +14,24 @@ class Item extends Component {
     componentWillUnmount() {
         this.props.clearItem();
     }
+
+    onClickCommentsButton = () => {
+        const {showComments, toggleOpen} = this.props;
+        showComments(this.props.match.params.id);
+        toggleOpen();
+    };
+
     contentItem() {
-        const {article: {title, body}, comments, showComments, isOpen, toggleOpen} = this.props;
-        let btnTitle;
-        if (isOpen) {
-            showComments(this.props.match.params.id);
-            btnTitle = 'hide comments'
-        } else btnTitle = 'show all comments';
-        const loading = isLoading(comments);
+        const {article: {title, body}, comments, isOpen, loadingComments} = this.props;
+        const btnTitle = isOpen ? 'hide comments' : 'show all comments';
         return (
             <div>
                 <h1>{title}</h1>
                 <p>{body}</p>
-                <button className="btn" onClick={toggleOpen}>
+                <button className="btn" onClick={this.onClickCommentsButton}>
                     {btnTitle}
                 </button>
-                {!loading && isOpen &&
+                {!loadingComments && isOpen &&
                 comments.map(({body, email}, index) => {
                     return <Comments body={body} email={email} key={index}/>
                 })}
@@ -39,10 +40,9 @@ class Item extends Component {
     }
 
     render() {
-        const loading = isLoading(this.props.article);
         return (
             <div className="container">
-                {!loading && this.contentItem()}
+                {this.props.loadingArticle ? <h1>Loading...</h1> : this.contentItem()}
             </div>
         )
     }
@@ -50,6 +50,8 @@ class Item extends Component {
 
 const MapStateToProps = state => ({
     article: getItem(state),
+    loadingArticle: loadingArticle(state),
+    loadingComments: loadingComments(state),
     comments: getComments(state)
 });
 
