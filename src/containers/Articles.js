@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {fetchArticles} from "../actions";
-import {getArticles} from "../selectors";
+import {getArticles, loadingArticles} from "../selectors";
 import ArticlesList from "../components/ArticlesList";
 
 class Articles extends Component {
@@ -11,12 +11,11 @@ class Articles extends Component {
     }
 
     render() {
-        const {articles} = this.props;
-        const loading = Object.keys(articles).length !== 0;
+        const {articles, loadingArticles} = this.props;
         return (
             <div className="container">
                 <h1>Articles</h1>
-                {loading && articles.map((item, index) => {
+                {!loadingArticles && articles.map((item, index) => {
                     return <ArticlesList item={item} key={index}/>
                 })}
             </div>
@@ -25,7 +24,8 @@ class Articles extends Component {
 }
 
 const MapStateToProps = state => ({
-    articles: getArticles(state)
+    articles: getArticles(state),
+    loadingArticles: loadingArticles(state)
 });
 
 const MapDispatchToProps = {

@@ -1,5 +1,9 @@
 export const getArticles = state => {
-    return state.articles
+    return state.articles.articles
+};
+
+export const loadingArticles = state => {
+    return state.articles.loading
 };
 
 export const getItem = state => {

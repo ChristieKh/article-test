@@ -1,4 +1,4 @@
-import {CLEAR_ITEM, FETCH_ARTICLE_START, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAIL} from "../actionsTypes";
+import {FETCH_ARTICLE_START, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAIL} from "../actionsTypes";
 import {Record} from "immutable";
 
 const ReducerRecord = Record({
@@ -20,21 +20,7 @@ export default function reducer(state = new ReducerRecord(), {type, article, err
             return state
                 .set('loading', false)
                 .set('error', error);
-        case CLEAR_ITEM:
-            return state;
         default:
             return state
     }
 }
-
-
-// export default (state = initialState, {type, article}) => {
-//     switch (type) {
-//         case FETCH_ARTICLE_SUCCESS:
-//             return article;
-//         case CLEAR_ITEM:
-//             return initialState;
-//         default:
-//             return state
-//     }
-// }

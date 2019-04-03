@@ -28,14 +28,3 @@ export default function reducer(state = new ReducerRecord(), {type, comments, er
             return state
     }
 }
-
-// export default (state = new ReducerRecord(), {type, comments}) => {
-//     switch (type) {
-//         case SHOW_COMMENTS_SUCCESS:
-//             return comments;
-//         case CLEAR_ITEM:
-//             return state;
-//         default:
-//             return state
-//     }
-// }

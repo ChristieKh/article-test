@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {clearItem, fetchArticle, showComments} from "../actions";
+import {fetchArticle, showComments} from "../actions";
 import {getComments, getItem, loadingArticle, loadingComments} from "../selectors";
 import Comments from "../components/Comments";
 import ToggleOpen from "../decorators/ToggleOpen";
@@ -11,14 +11,10 @@ class Item extends Component {
         this.props.fetchArticle(this.props.match.params.id);
     }
 
-    componentWillUnmount() {
-        this.props.clearItem();
-    }
-
     onClickCommentsButton = () => {
         const {showComments, toggleOpen} = this.props;
-        showComments(this.props.match.params.id);
         toggleOpen();
+        showComments(this.props.match.params.id);
     };
 
     contentItem() {
@@ -57,8 +53,7 @@ const MapStateToProps = state => ({
 
 const MapDispatchToProps = {
     fetchArticle,
-    showComments,
-    clearItem
+    showComments
 };
 
-export default connect(MapStateToProps, MapDispatchToProps)(ToggleOpen(Item));
+export default connect(MapStateToProps, MapDispatchToProps, null, {pure: false})(ToggleOpen(Item));
