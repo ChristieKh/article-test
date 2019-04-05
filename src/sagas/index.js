@@ -7,6 +7,6 @@ export function* saga() {
     yield all([
         takeEvery('FETCH_ARTICLES_START', getArticlesSaga),
         takeEvery('FETCH_ARTICLE_START', getItemSaga),
-        takeEvery('SHOW_COMMENTS_START',showCommentsSaga)
+        takeEvery('SHOW_COMMENTS_START', showCommentsSaga)
     ])
 }

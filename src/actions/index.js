@@ -4,7 +4,6 @@ import {FETCH_ARTICLES_START, FETCH_ARTICLE_START, SHOW_COMMENTS_START} from '..
 export const fetchArticles = () => {
     return {
         type: FETCH_ARTICLES_START,
-
     }
 };
 

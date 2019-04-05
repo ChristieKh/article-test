@@ -12,9 +12,9 @@ class Item extends Component {
     }
 
     onClickCommentsButton = () => {
-        const {showComments, toggleOpen} = this.props;
+        const {showComments, toggleOpen, isOpen} = this.props;
         toggleOpen();
-        showComments(this.props.match.params.id);
+        !isOpen && showComments(this.props.match.params.id);
     };
 
     contentItem() {
@@ -28,8 +28,8 @@ class Item extends Component {
                     {btnTitle}
                 </button>
                     {!loadingComments && isOpen &&
-                    comments.map(({body, email}, index) => {
-                        return <Comments body={body} email={email} key={index}/>
+                    comments.map(({body, email, id}) => {
+                        return <Comments body={body} email={email} key={id}/>
                     })}
             </div>
         )
