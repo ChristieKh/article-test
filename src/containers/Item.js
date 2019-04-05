@@ -27,10 +27,10 @@ class Item extends Component {
                 <button className="btn" onClick={this.onClickCommentsButton}>
                     {btnTitle}
                 </button>
-                {!loadingComments && isOpen &&
-                comments.map(({body, email}, index) => {
-                    return <Comments body={body} email={email} key={index}/>
-                })}
+                    {!loadingComments && isOpen &&
+                    comments.map(({body, email}, index) => {
+                        return <Comments body={body} email={email} key={index}/>
+                    })}
             </div>
         )
     }

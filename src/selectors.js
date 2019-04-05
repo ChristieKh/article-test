@@ -1,5 +1,5 @@
 export const getArticles = state => {
-    return state.articles.articles
+    return state.articles.articles || []
 };
 
 export const loadingArticles = state => {
@@ -11,7 +11,7 @@ export const getItem = state => {
 };
 
 export const getComments = state => {
-    return state.comments.comments
+    return state.comments.comments || []
 };
 
 export const loadingArticle = state => {
