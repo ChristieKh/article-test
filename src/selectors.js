@@ -1,3 +1,5 @@
+import {createSelector} from "reselect";
+
 export const getArticles = state => {
     return state.articles.articles || []
 };
@@ -13,6 +15,12 @@ export const getItem = state => {
 export const getComments = state => {
     return state.comments.comments || []
 };
+
+export const getCountComments = createSelector(
+    getComments,
+    countComments => countComments.length
+);
+
 
 export const loadingArticle = state => {
     return state.article.loading

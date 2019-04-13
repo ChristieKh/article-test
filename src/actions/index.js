@@ -1,4 +1,4 @@
-import {FETCH_ARTICLES_START, FETCH_ARTICLE_START, SHOW_COMMENTS_START} from '../actionsTypes';
+import {FETCH_ARTICLES_START, FETCH_ARTICLE_START, SHOW_COMMENTS_START, ADD_COMMENT} from '../actionsTypes';
 
 
 export const fetchArticles = () => {
@@ -18,5 +18,13 @@ export const showComments = (id) => {
     return {
         type: SHOW_COMMENTS_START,
         id
+    }
+};
+
+export const addComment = (email, body) => {
+    return {
+        type: ADD_COMMENT,
+        email,
+        body
     }
 };

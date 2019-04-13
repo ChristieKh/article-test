@@ -10,3 +10,12 @@ export function* showCommentsSaga({id}) {
     }
 
 }
+
+export function* addCommentsSaga({email, body}) {
+    try {
+        console.info(email, body);
+        yield put({type: "ADD_COMMENT_SUCCESS", email, body})
+    } catch (error) {
+        yield put({type: "ADD_COMMENT_FAIL", error})
+    }
+}

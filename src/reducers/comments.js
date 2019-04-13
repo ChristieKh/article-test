@@ -1,4 +1,5 @@
 import {
+    ADD_COMMENT_SUCCESS,
     SHOW_COMMENTS_FAIL,
     SHOW_COMMENTS_START,
     SHOW_COMMENTS_SUCCESS
@@ -11,7 +12,10 @@ const ReducerRecord = Record({
     loadingComments: true
 });
 
-export default function reducer(state = new ReducerRecord(), {type, comments, error}) {
+export default function reducer(state = new ReducerRecord(), {type, comments, error, email, body}) {
+    const id = state.comments && state.comments.length + 1;
+    const postId = state.comments && state.comments[0].postId;
+    const newComment = {postId, id, name: body, email, body};
     switch (type) {
         case SHOW_COMMENTS_START:
             return state.set('loadingComments', true);
@@ -24,6 +28,11 @@ export default function reducer(state = new ReducerRecord(), {type, comments, er
             return state
                 .set('loadingComments', false)
                 .set('error', error);
+
+        case ADD_COMMENT_SUCCESS:
+            return state
+                .updateIn(['comments'], arr => arr.concat([newComment]));
+
         default:
             return state
     }
