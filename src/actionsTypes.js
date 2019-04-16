@@ -24,5 +24,3 @@ export const ADD_COMMENT_FAIL = 'ADD_COMMENT_FAIL';
 
 export const SHOW_MODAL_TRUE = 'SHOW_MODAL_TRUE';
 export const SHOW_MODAL_FALSE = 'SHOW_MODAL_FALSE';
-
-export const CAN_EDIT_ITEM = 'CAN_EDIT_ITEM';

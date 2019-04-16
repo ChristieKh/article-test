@@ -3,7 +3,7 @@ import {
     FETCH_ARTICLE_START,
     SHOW_COMMENTS_START,
     ADD_COMMENT,
-    SHOW_MODAL_FALSE, SHOW_MODAL_TRUE, DELETE_ITEM_START, ADD_ARTICLE, CAN_EDIT_ITEM
+    SHOW_MODAL_FALSE, SHOW_MODAL_TRUE, DELETE_ITEM_START, ADD_ARTICLE
 } from '../actionsTypes';
 
 
@@ -61,9 +61,4 @@ export const addArticle = (email, title, body) => {
     }
 };
 
-export const canEditItem = (id) => {
-    return {
-        type: CAN_EDIT_ITEM,
-        id
-    }
-};
+

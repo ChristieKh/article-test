@@ -1,5 +1,5 @@
 import {
-    ADD_ARTICLE_SUCCESS, CAN_EDIT_ITEM,
+    ADD_ARTICLE_SUCCESS,
     DELETE_ITEM_SUCCESS,
     FETCH_ARTICLES_FAIL,
     FETCH_ARTICLES_START,
@@ -14,7 +14,6 @@ const ReducerRecord = Record({
 });
 
 export default (state = new ReducerRecord(), {type, articles, error, id, email, title, body}) => {
-    //const updateItemId = state.articles.find(item => item.id);
     const idNewArticle = state.articles && state.articles.length + 1;
     const newArticle = {
         userId: email,
@@ -40,12 +39,6 @@ export default (state = new ReducerRecord(), {type, articles, error, id, email, 
             return state
                 .set('loading', false)
                 .updateIn(['articles'], arr => arr.concat([newArticle]))
-                .set('error', null);
-
-        case CAN_EDIT_ITEM:
-            return state
-                .set('loading', false)
-                //.update('articles', arr => arr.filter(item => item.id === id).set('update', true))
                 .set('error', null);
 
         case DELETE_ITEM_SUCCESS:

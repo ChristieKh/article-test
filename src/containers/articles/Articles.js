@@ -15,7 +15,6 @@ class Articles extends Component {
 
     render() {
         const {articles, loadingArticles, showModal, doShowModal} = this.props;
-       // console.info("item", articles)
         return (
             <div className="container">
                 <Heading>
