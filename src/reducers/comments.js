@@ -31,7 +31,9 @@ export default function reducer(state = new ReducerRecord(), {type, comments, er
 
         case ADD_COMMENT_SUCCESS:
             return state
-                .updateIn(['comments'], arr => arr.concat([newComment]));
+                .set('loadingComments', false)
+                .updateIn(['comments'], arr => arr.concat([newComment]))
+                .set('error', null);
 
         default:
             return state

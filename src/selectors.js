@@ -29,3 +29,7 @@ export const loadingArticle = state => {
 export const loadingComments = state => {
     return state.comments.loadingComments
 };
+
+export const showModalWindow = state => {
+    return state.showModal.showModal
+};

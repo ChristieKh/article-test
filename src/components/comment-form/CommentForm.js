@@ -1,29 +1,8 @@
 import React, {Component, createRef} from 'react';
-import styled from "styled-components";
 import {connect} from "react-redux";
-import {addComment} from "../actions";
-import validator from 'email-validator';
-
-const Container = styled.div` 
-    display: flex;
-    flex-flow: row wrap;
-`;
-
-const FlexColumn = styled.div` 
-    display: flex;
-    flex-direction: column;
-    margin-right: 10px;
-`;
-
-const CommentText = styled.textarea` 
-    width: 78%;
-    min-height: 90px;
-`;
-
-const Button = styled.button`
-    padding: 0 20px;
-    background-color: ${({type}) => type === 'error' ? 'pink' : 'transparent'}
-`;
+import {addComment} from "../../actions";
+import {Button, CommentText, Container, FlexColumn} from "./CommentFormStyled";
+import {isValidation} from "../../utils";
 
 
 class CommentForm extends Component {
@@ -43,14 +22,12 @@ class CommentForm extends Component {
         })
     };
 
-    isValidation() {
-        return validator.validate(this.state.email);
-    }
 
     buttonTypeChange() {
-        if (!this.isValidation() && this.state.email !== "") {
+        const {email, body} = this.state;
+        if (!isValidation(email) && email !== "") {
             return "error"
-        } else if (this.state.body === "" && this.state.email !== "") return "error";
+        } else if (body === "" && email !== "") return "error";
         else return ""
     }
 
@@ -58,7 +35,7 @@ class CommentForm extends Component {
     render() {
         const {addComment} = this.props;
         const {email, body} = this.state;
-        const buttonDisabled = !this.isValidation() || body === "";
+        const buttonDisabled = !isValidation(email) || body === "";
         return (
             <Container>
                 <FlexColumn>
